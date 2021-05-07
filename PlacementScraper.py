@@ -181,20 +181,23 @@ class PlacementScraper():
             'span[class=" eois5  ETPPOd USV3fe CzRzXb dwBwye"')
         for webpage in self.all_registration_elements:
             for self.registration_search_text in self.registration_search_texts:
-                if self.registration_search_text in webpage.text:
-                    webpage.click()
-                    overlay_element = self.driver.find_element_by_css_selector(
-                        'c-wiz[class="zQTmif SSPGKf eejsDc oCHqfe"]')
-                    style_attr = overlay_element.get_attribute('style')
-                    while 'visibility: hidden; opacity: 0;' in str(style_attr):
+                try:
+                    if self.registration_search_text in webpage.text:
+                        webpage.click()
                         overlay_element = self.driver.find_element_by_css_selector(
                             'c-wiz[class="zQTmif SSPGKf eejsDc oCHqfe"]')
                         style_attr = overlay_element.get_attribute('style')
-                    time.sleep(2)
-                    self.GetTableContents()
-                    self.WriteRecord()
-                    self.PrintRecord()
-                    self.driver.back()
+                        while 'visibility: hidden; opacity: 0;' in str(style_attr):
+                            overlay_element = self.driver.find_element_by_css_selector(
+                                'c-wiz[class="zQTmif SSPGKf eejsDc oCHqfe"]')
+                            style_attr = overlay_element.get_attribute('style')
+                        time.sleep(2)
+                        self.GetTableContents()
+                        self.WriteRecord()
+                        self.PrintRecord()
+                        self.driver.back()
+                except:
+                    pass
 
     def GetTableContents(self):
         try:
