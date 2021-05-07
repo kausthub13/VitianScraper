@@ -198,7 +198,7 @@ class PlacementScraper():
 
     def GetTableContents(self):
         try:
-            self.main_body = self.driver.find_element_by_class_name('gmail_default')
+            self.main_body = self.driver.find_element_by_class_name('ptW7te')
             self.table_element = self.main_body.find_element_by_tag_name('table')
         except NoSuchElementException:
             self.main_body = self.driver.find_element_by_class_name('gmail_quote')
